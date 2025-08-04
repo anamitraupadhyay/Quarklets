@@ -6,19 +6,18 @@ import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
 
-@WebServlet("/helloservlet")
-class helloservlet extends HttpServlet{
-    public void doget(HttpServletRequest request, HttpServletResponse response)throws ServletException, IOException {
-        
-        response.setContentType("application/json");
-        
-        response.setCharacterEncoding("UTF-8");
+@WebServlet("/user")
+public class UserServlet extends BaseServlet {
 
-        PrintWriter out = response.getWriter();
+    @JsonBody
+    public static class UserRequest {
+        public String name;
+        public int age;
+    }
 
-        String jsonResponse = "{\"message\": \"helloservlet\"}";
-        out.print(jsonResponse);
-
-        out.flush();
+    @Override
+    protected void doPost(HttpServletRequest req, HttpServletResponse res) throws IOException {
+        UserRequest user = parseBody(req, UserRequest.class);
+        writeJson(res, Map.of("message", "User added: " + user.name));
     }
 }
