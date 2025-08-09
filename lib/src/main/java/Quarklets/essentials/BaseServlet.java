@@ -12,7 +12,7 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 
 public class BaseServlet extends HttpServlet {
-    public JsonObject jsonparse(HttpServletRequest Request) /*throws IOException*/ {
+    public static JsonObject jsonparse(HttpServletRequest Request) /*throws IOException*/ {
         
         StringBuffer jsonPayload = new StringBuffer();
 
