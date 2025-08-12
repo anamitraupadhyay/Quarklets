@@ -1,7 +1,7 @@
-package main.java;
+import lombok.Data;
 
-
+@Data
 public class InputPOJO {
-    protected String Name;
-    protected int age;   
+    protected String name;
+    protected int age;
 }
