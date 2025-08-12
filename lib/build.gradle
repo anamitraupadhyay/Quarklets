@@ -77,7 +77,6 @@ publishing {
             }
         }
     }
-}
 
 
 signing {
