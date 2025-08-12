@@ -35,6 +35,34 @@ publishing {
     publications {
         mavenJava(MavenPublication) {
             from components.java
+
+            pom {
+    name = "quarklets-lib"
+    description = "A Quarkus-based helper library."
+    url = "https://github.com/anamitraupadhyay/Quarklets"
+
+    licenses {
+        license {
+            name = "The Apache License, Version 2.0"
+            url = "https://www.apache.org/licenses/LICENSE-2.0.txt"
+        }
+    }
+
+    developers {
+        developer {
+            id = "anamitraupadhyay"
+            name = "Anamitra Upadhyay"
+            email = "your.email@example.com"
+        }
+    }
+
+    scm {
+        connection = "scm:git:git://github.com/anamitraupadhyay/Quarklets.git"
+        developerConnection = "scm:git:ssh://github.com/anamitraupadhyay/Quarklets.git"
+        url = "https://github.com/anamitraupadhyay/Quarklets"
+    }
+}
+            }
         }
     }
     repositories {
@@ -50,6 +78,7 @@ publishing {
         }
     }
 }
+
 
 signing {
     sign publishing.publications.mavenJava
