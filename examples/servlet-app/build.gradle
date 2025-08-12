@@ -6,18 +6,24 @@ plugins {
 repositories {
     mavenCentral()
     mavenLocal()
-    // Add this single line for snapshot support
     maven { url 'https://central.sonatype.com/repository/maven-snapshots/' }
 }
 
 dependencies {
-    implementation enforcedPlatform("${quarkusPlatformGroupId}:${quarkusPlatformArtifactId}:${quarkusPlatformVersion}")
+    implementation enforcedPlatform('io.quarkus.platform:quarkus-bom:3.12.0')
     implementation 'io.quarkus:quarkus-undertow'
     implementation 'io.quarkus:quarkus-arc'
+    
+    // Add these essential Quarkus dependencies
+    implementation 'io.quarkus:quarkus-bootstrap-runner'
+    implementation 'io.quarkus:quarkus-core'
+    
     testImplementation 'io.quarkus:quarkus-junit5'
+    
     compileOnly 'org.projectlombok:lombok:1.18.34'
     annotationProcessor 'org.projectlombok:lombok:1.18.34'
-    // Change the artifact name to match what you published
+    
+    // Your library
     implementation "io.github.anamitraupadhyay:lib:1.0.0-SNAPSHOT"
 }
 
@@ -32,6 +38,7 @@ java {
 test {
     systemProperty "java.util.logging.manager", "org.jboss.logmanager.LogManager"
 }
+
 compileJava {
     options.encoding = 'UTF-8'
     options.compilerArgs << '-parameters'

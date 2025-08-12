@@ -1,11 +1,11 @@
-pluginManagement {
+/*pluginManagement {
     repositories {
         mavenCentral()
         gradlePluginPortal()
         mavenLocal()
     }
     plugins {
-        id "${quarkusPluginId}" version "${quarkusPluginVersion}"
+        id 'io.quarkus' version '3.12.0'
     }
-}
+}*/
 rootProject.name='servlet-app'
