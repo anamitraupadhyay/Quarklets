@@ -1,11 +1,9 @@
 plugins {
     id 'java-library'
     id 'maven-publish'
-    //id 'signing'
 }
 
 group = "io.github.anamitraupadhyay"
-
 version = '1.0.0-SNAPSHOT'
 
 repositories {
@@ -16,7 +14,8 @@ dependencies {
     testImplementation 'org.junit.jupiter:junit-jupiter:5.10.2'
     testRuntimeOnly 'org.junit.platform:junit-platform-launcher:1.10.2'
 
-    implementation enforcedPlatform("io.quarkus:quarkus-bom:3.12.0")
+    implementation platform("io.quarkus:quarkus-bom:3.12.0")
+
     implementation 'io.quarkus:quarkus-arc'
     implementation 'io.quarkus:quarkus-undertow'
 }
@@ -25,10 +24,19 @@ java {
     toolchain {
         languageVersion = JavaLanguageVersion.of(21)
     }
+    withSourcesJar()
+    withJavadocJar()
 }
 
 tasks.named('test') {
     useJUnitPlatform()
+}
+
+// Configure Javadoc task to be less strict (useful for Java 8+)
+tasks.named('javadoc') {
+    if (JavaVersion.current().isJava8Compatible()) {
+        options.addStringOption('Xdoclint:none', '-quiet')
+    }
 }
 
 publishing {
@@ -36,49 +44,111 @@ publishing {
         mavenJava(MavenPublication) {
             from components.java
 
+            // Ensure the artifact ID matches your project name
+            artifactId = project.name
+
             pom {
-    name = "quarklets-lib"
-    description = "A Quarkus-based helper library."
-    url = "https://github.com/anamitraupadhyay/Quarklets"
+                name = 'Quarklets Library'
+                description = 'A Quarkus-based helper library for rapid application development'
+                url = 'https://github.com/anamitraupadhyay/Quarklets'
+                
+                packaging = 'jar'
 
-    licenses {
-        license {
-            name = "The Apache License, Version 2.0"
-            url = "https://www.apache.org/licenses/LICENSE-2.0.txt"
-        }
-    }
+                licenses {
+                    license {
+                        name = 'The Apache License, Version 2.0'
+                        url = 'https://www.apache.org/licenses/LICENSE-2.0.txt'
+                    }
+                }
 
-    developers {
-        developer {
-            id = "anamitraupadhyay"
-            name = "Anamitra Upadhyay"
-            email = "your.email@example.com"
-        }
-    }
+                developers {
+                    developer {
+                        id = 'anamitraupadhyay'
+                        name = 'Anamitra Upadhyay'
+                        email = 'anamitraupadhyay@users.noreply.github.com'
+                    }
+                }
 
-    scm {
-        connection = "scm:git:git://github.com/anamitraupadhyay/Quarklets.git"
-        developerConnection = "scm:git:ssh://github.com/anamitraupadhyay/Quarklets.git"
-        url = "https://github.com/anamitraupadhyay/Quarklets"
-    }
-}
+                scm {
+                    connection = 'scm:git:git://github.com/anamitraupadhyay/Quarklets.git'
+                    developerConnection = 'scm:git:ssh://github.com/anamitraupadhyay/Quarklets.git'
+                    url = 'https://github.com/anamitraupadhyay/Quarklets'
+                }
             }
         }
     }
+
     repositories {
         maven {
-            name = "OSSRH"
-            url = version.endsWith("SNAPSHOT") ?
-                uri("https://s01.oss.sonatype.org/content/repositories/snapshots/") :
-                uri("https://s01.oss.sonatype.org/service/local/staging/deploy/maven2/")
+            name = "CentralPortal"
+            // Use Portal OSSRH Staging API for Gradle compatibility
+            def releasesRepoUrl = uri("https://ossrh-staging-api.central.sonatype.com/service/local/staging/deploy/maven2/")
+            def snapshotsRepoUrl = uri("https://central.sonatype.com/repository/maven-snapshots/")
+            url = version.endsWith('SNAPSHOT') ? snapshotsRepoUrl : releasesRepoUrl
+            
             credentials {
-                username = findProperty("mavenCentralUsername") ?: ""
-                password = findProperty("mavenCentralPassword") ?: ""
+                username = findProperty("centralPortalUsername") ?: 
+                          System.getenv("CENTRAL_PORTAL_USERNAME") ?: ""
+                password = findProperty("centralPortalPassword") ?: 
+                          System.getenv("CENTRAL_PORTAL_PASSWORD") ?: ""
             }
         }
     }
+}
 
+// Only configure signing for non-snapshot versions
+if (!version.endsWith("SNAPSHOT")) {
+    apply plugin: 'signing'
+    
+    signing {
+        required { gradle.taskGraph.hasTask("publish") }
+        
+        // Use gpg command line tool (recommended)
+        useGpgCmd()
+        
+        sign publishing.publications.mavenJava
+    }
+}
 
-/*signing {
-    sign publishing.publications.mavenJava
-}*/
+// Additional tasks for convenience
+tasks.register('publishToCentralPortal') {
+    dependsOn 'publishMavenJavaPublicationToCentralPortalRepository'
+    group = 'publishing'
+    description = 'Publishes to Maven Central via Central Portal'
+}
+
+tasks.register('publishSnapshot') {
+    dependsOn 'publishMavenJavaPublicationToCentralPortalRepository'
+    group = 'publishing'
+    description = 'Publishes snapshot version to Central Portal'
+    doFirst {
+        if (!version.endsWith('SNAPSHOT')) {
+            throw new GradleException('This task should only be used for SNAPSHOT versions')
+        }
+    }
+}
+
+// Task to verify publication setup
+tasks.register('verifyPublication') {
+    group = 'publishing'
+    description = 'Verifies that the publication is properly configured'
+    
+    // Make it configuration cache compatible
+    notCompatibleWithConfigurationCache("Uses project properties at execution time")
+    
+    doLast {
+        def projectGroup = project.group
+        def projectName = project.name
+        def projectVersion = project.version
+        
+        println "Project: ${projectGroup}:${projectName}:${projectVersion}"
+        println "Publications:"
+        publishing.publications.each { pub ->
+            println "  - ${pub.name}: ${pub.groupId}:${pub.artifactId}:${pub.version}"
+        }
+        println "Repositories:"
+        publishing.repositories.each { repo ->
+            println "  - ${repo.name}: ${repo.url}"
+        }
+    }
+}
