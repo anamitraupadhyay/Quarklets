@@ -12,4 +12,5 @@ plugins {
 
 
 rootProject.name = "Quarklets"
-include("lib", "examples:servlet-app")
+include("lib")
+// include("examples:servlet-app") // comment this out temporarily

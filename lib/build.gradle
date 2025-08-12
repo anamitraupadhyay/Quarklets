@@ -1,7 +1,7 @@
 plugins {
     id 'java-library'
     id 'maven-publish'
-    id 'signing'
+    //id 'signing'
 }
 
 group = "io.github.anamitraupadhyay"
@@ -79,6 +79,6 @@ publishing {
     }
 
 
-signing {
+/*signing {
     sign publishing.publications.mavenJava
-}
+}*/
