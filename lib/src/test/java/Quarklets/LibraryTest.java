@@ -4,6 +4,9 @@
 package Quarklets;
 
 import org.junit.jupiter.api.Test;
+
+import io.github.anamitraupadhyay.Quarklets.Library;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 class LibraryTest {

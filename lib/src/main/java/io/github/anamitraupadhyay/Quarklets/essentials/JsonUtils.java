@@ -1,4 +1,4 @@
-package Quarklets.essentials;
+package io.github.anamitraupadhyay.Quarklets.essentials;
 
 import jakarta.json.*;
 import jakarta.servlet.http.HttpServletRequest;
