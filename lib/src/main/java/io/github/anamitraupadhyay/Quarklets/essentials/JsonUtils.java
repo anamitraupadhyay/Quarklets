@@ -23,6 +23,23 @@ public final class JsonUtils {
         }
     }
 
+    /*public static JsonObject parseBuffer(HttpServletRequest req) {
+        //try (StringBuffer jsonpayloadBuffer = new StringBuffer()) { // The resource type StringBuffer does not implement
+                                                                    // java.lang.AutoCloseableJava(16778087)
+            //BufferSerializer
+            //BufferPoolMXBean
+            //BufferedInputStream bufferinput = new BufferedInputStream(null)
+            //String line;
+            //while (!(line = reader.readline(null))) {
+                //jsonpayloadBuffer.append(jsonpayloadBuffer);
+            //}
+
+            return new JsonObject() {
+                
+            };
+        }*/
+
+
     public static void write(HttpServletResponse response, JsonObject json) {
         response.setContentType("application/json");
         response.setCharacterEncoding("UTF-8");
