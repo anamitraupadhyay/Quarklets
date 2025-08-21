@@ -15,10 +15,35 @@ class Patternmatch {
     
 }
 
-interface Whattobe {
-    //now how interface may be help to my cause like idk
+interface StringType {
+    public abstract String StringPojo();
 }
 
-class Datafromrequestservlet {
+interface CharArrayType {
+    public abstract char[] CharPojo();
+}
+
+interface StringBufferType {
+    public abstract StringBuffer SbufferPojo();
+}
+
+interface StringBuilder {
+    public abstract StringBuilder SBuilderpojo();
+}
+
+class DatafromrequestservletCharArrayBuilder /*implements CharArrayType*/ {
     
+    char[] obj;
+
+    CharArrayType target;
+
+    public char[] SBuilderpojo() {
+        //char[] obj;
+        return this.obj; //why local variable not initialized? the moment i made it instance the error vanished
+    }
+
+    DatafromrequestservletCharArrayBuilder(CharArrayType target) {
+        //pojo class implements CharArrayType as i know it automatically is that interface object so
+        this.target = target;
+    }
 }

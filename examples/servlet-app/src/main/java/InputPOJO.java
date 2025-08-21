@@ -1,7 +1,12 @@
-import lombok.Data;
+package main.java;
 
-@Data
-public class InputPOJO {
-    protected String name;
-    protected int age;
+//import lombok.Data;
+
+//@Data
+public class InputPOJO implements Whattobe{
+    public void datatype()
+    {
+        String name;
+        int age;
+    }
 }
