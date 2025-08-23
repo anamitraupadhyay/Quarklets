@@ -1,4 +1,4 @@
-package io.github.anamitraupahyay.Quarklets.experimental;
+package io.github.anamitraupadhyay.Quarklets.experimetal.datastructure;
 
 public class Dino{
 	
