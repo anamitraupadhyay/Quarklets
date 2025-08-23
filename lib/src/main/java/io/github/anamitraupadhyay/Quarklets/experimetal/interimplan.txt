@@ -1,0 +1,5 @@
+so for nogenerics:
+parser in static nature
+data in dynamic nature
+processing logic in static templates with dynamic dispatch
+
