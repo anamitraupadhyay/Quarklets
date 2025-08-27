@@ -1,24 +1,31 @@
 package io.github.anamitraupadhyay.Quarklets.experimetal.datastructure;
 
-public class Dino{
-	
-	public enum Jsontype{
-		OBJECT(false, true), 
-		ARRAY(true, true), 
-		VALUES(true, false);
 
-		private final boolean keycanbenull;
-		private final boolean canhavechildren;
+enum Jsontype {
+	OBJECT(false, true),
+	ARRAY(true, true),
+	VALUES(true, false);
 
-		Jsontype(boolean keycanbenull, boolean canhavechildren){
-			this.keycanbenull = keycanbenull;
-			this.canhavechildren = canhavechildren;
-		}
+	private final boolean keycanbenull;
+	private final boolean canhavechildren;
 
-		public boolean getkeycanbenull(){ return keycanbenull;}
-		public boolean getcanhavechildren(){ return canhavechildren;}
+	Jsontype(boolean keycanbenull, boolean canhavechildren) {
+		this.keycanbenull = keycanbenull;
+		this.canhavechildren = canhavechildren;
 	}
 
+	public boolean getkeycanbenull() {
+		return keycanbenull;
+	}
+
+	public boolean getcanhavechildren() {
+		return canhavechildren;
+	}
+}
+
+public abstract class Dino{
+	
+	
 	Jsontype jsonenum;
 
 	Dino[] childdinoarray;
@@ -32,57 +39,75 @@ public class Dino{
 	int childcount;
 
 
-	Dino(Jsontype jsonenum, Dino[] childdinoarray, String value, String key){
+	Dino(Jsontype jsonenum, Dino[] childdinoarray, String value, String key) {
 		this.jsonenum = jsonenum;
 		this.childdinoarray = childdinoarray;
 		this.value = value;
 		this.key = key;
+
+		if (jsonenum.getcanhavechildren()) { // written in constructor as to init memory efficiently
+			this.childdinoarray = new Dino[4];
+		} else {
+			this.childdinoarray = null;
+		}
 	}
 
+	public void addchild(Dino child) //throws IllegalAccessException
+	{
+		while( this.childcount<this.childdinoarray.length ) {
+            if (this.jsonenum.getcanhavechildren()) { //child.jsonenum is wrong logically as checking childs ability to check can have child or not
+                this.childdinoarray[this.childcount] = child;
+                this.childcount++;
+                if(this.childcount > this.childdinoarray.length){
+                    //method call to increase the size? to increasesize how to call it
+                }
+            } else {
+                //throw new IllegalAccessException(child.jsonenum + "cant have children"); shouldn't give exception instead failsafe as
+            }
+        }
+	}
+    public void incresesize(int childcount) /*implements whichrunsauto_likethreadwithrunnable i guesss its bogus given current implementation*/ {
+        Dino[] biggerarray = new Dino[this.childdinoarray.length *2];
+
+        for(int i = 0; i < biggerarray.length; i++ ){
+            //expansion logic
+        }
+    }
 }
 
 interface autoparse{
-	public Dino parsing();
+	public void parsing();
 }
 
-interface stack {
-	public Dino Stackops();
-}
 
-class DinoStack /*extends Dino*/{
+class ObjectDino extends Dino implements autoparse /*likerunnableandprocess*/ {
 
-	DinoStack(Jsontype jsonenum, Dino[] childdinoarray, String value, String key){
-		//jdk version min 23 needed to call super after some method calls for config
-		super(Jsontype jsonenum, Dino[] childdinoarray, String value, String key);
+
+	ObjectDino(Dino[] childdinoarray, String value, String key) {
+		super(Jsontype.OBJECT, childdinoarray, value, key);
+		//TODO Auto-generated constructor stub
 	}
-
-	public Dino parsing(){
+	// specialized behavior for OBJECT nodes
+	public void parsing() {
+		ObjectDino obj = new ObjectDino();
 	}
 }
 
-class DinoTree /*extends Dino*/{
+class ArrayDino extends Dino {
 
-}
-
-class parsing /*extends Dino*/ implements autoparse, stack, {
-
-}
-
-
-
-abstract class DinoTemplate{
-	// basic template for the below 3 containing enums for the subclasses
-}
-
-public class ObjectDino extends DinoTemplate implements likerunnableandprocess{
-    // specialized behavior for OBJECT nodes
-}
-
-public class ArrayDino extends DinoTemplate {
+	ArrayDino(Dino[] childdinoarray, String value, String key) {
+		super(Jsontype.ARRAY, childdinoarray, value, key);
+		//TODO Auto-generated constructor stub
+	}
     // specialized behavior for ARRAY nodes
 }
 
-public class ValueDino extends DinoTemplate {
+class ValueDino extends Dino {
+
+	ValueDino(Dino[] childdinoarray, String value, String key) {
+		super(Jsontype.VALUES, childdinoarray, value, key);
+		//TODO Auto-generated constructor stub
+	}
     // specialized behavior for VALUE nodes
 }
 
