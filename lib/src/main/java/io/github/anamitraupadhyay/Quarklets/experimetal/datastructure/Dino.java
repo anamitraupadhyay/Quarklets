@@ -28,6 +28,10 @@ public abstract class Dino{
 	
 	Jsontype jsonenum;
 
+    /**
+     * in order to parse the Dino type array to extend and copy its contents to the biggerarray that is making the array suit for parsing using loops.
+     *
+     */
 	Dino[] childdinoarray;
 
 	String value;
@@ -60,18 +64,20 @@ public abstract class Dino{
                 this.childcount++;
                 if(this.childcount > this.childdinoarray.length){
                     //method call to increase the size? to increasesize how to call it
+                    Dino[] biggerarray = new Dino[this.childdinoarray.length *2];
+
+                    for(int i = 0; i < this.childdinoarray.length; i++ ){//look over the below comment its decided that this loop will run to copy the content
+                        //expansion logic i.e copying the existing childdinoarray over the biggerarray and then changing the childdinoarray
+                        //so the loop will run upto this.childdinoarray.length not biggerarray.length
+                        //now the main problem now i have to mini parse to copy the content or any other logic will work?
+                    }
                 }
             } else {
                 //throw new IllegalAccessException(child.jsonenum + "cant have children"); shouldn't give exception instead failsafe as
             }
         }
 	}
-    public void incresesize(int childcount) /*implements whichrunsauto_likethreadwithrunnable i guesss its bogus given current implementation*/ {
-        Dino[] biggerarray = new Dino[this.childdinoarray.length *2];
-
-        for(int i = 0; i < biggerarray.length; i++ ){
-            //expansion logic
-        }
+    public static void incresesize(Dino[] child) /*implements whichrunsauto_likethreadwithrunnable i guesss its bogus given current implementation*/ {//can keep the void return type as i have to set the reference variable to created biggerarray and does the memory leak happen if i dont handle the old pointed array
     }
 }
 
@@ -80,7 +86,7 @@ interface autoparse{
 }
 
 
-class ObjectDino extends Dino implements autoparse /*likerunnableandprocess*/ {
+class ObjectDino extends Dino /*implements autoparse likerunnableandprocess*/ {
 
 
 	ObjectDino(Dino[] childdinoarray, String value, String key) {
@@ -88,9 +94,9 @@ class ObjectDino extends Dino implements autoparse /*likerunnableandprocess*/ {
 		//TODO Auto-generated constructor stub
 	}
 	// specialized behavior for OBJECT nodes
-	public void parsing() {
+	/*public void parsing() {
 		ObjectDino obj = new ObjectDino();
-	}
+	}*/
 }
 
 class ArrayDino extends Dino {
