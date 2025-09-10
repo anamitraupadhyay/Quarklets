@@ -1,6 +1,6 @@
 package io.github.anamitraupadhyay.Quarklets.anyjson.nogenerics;
 
-import static io.github.anamitraupadhyay.Quarklets.essentials.JsonUtils.parse;  // Only a type can be imported.happened when i didnt added the method i wanted which was static in nature
+//import static io.github.anamitraupadhyay.Quarklets.essentials.JsonUtils.parse;  // Only a type can be imported.happened when i didnt added the method i wanted which was static in nature
                                                                                 // io.github.anamitraupadhyay.Quarklets.essentials
                                                                                 // resolves to a packageJava(268435843)
 

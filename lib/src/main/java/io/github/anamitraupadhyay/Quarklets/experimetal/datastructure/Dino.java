@@ -94,35 +94,3 @@ interface autoparse{
 }
 
 
-class ObjectDino extends Dino /*implements autoparse likerunnableandprocess*/ {
-
-
-	ObjectDino(/*Dino[] childdinoarray, String value,*/ String key) {
-		super(Jsontype.OBJECT, /*childdinoarray,*/ null, key);
-		//TODO Auto-generated constructor stub
-	}
-	// specialized behavior for OBJECT nodes
-	/*public void parsing() {
-		ObjectDino obj = new ObjectDino();
-	}*/
-}
-
-class ArrayDino extends Dino {
-
-	ArrayDino(/*Dino[] childdinoarray, String value,*/ String key) {
-		super(Jsontype.ARRAY, /*childdinoarray,*/ null, key);
-		//TODO Auto-generated constructor stub
-	}
-    // specialized behavior for ARRAY nodes
-}
-
-class ValueDino extends Dino {
-
-	ValueDino(/*Dino[] childdinoarray,*/ String value, String key) {
-		super(Jsontype.VALUES/*,childdinoarray*/, value, key);
-		//TODO Auto-generated constructor stub
-	}
-    // specialized behavior for VALUE nodes
-}
-
-

@@ -3,3 +3,12 @@ parser in static nature
 data in dynamic nature
 processing logic in static templates with dynamic dispatch
 
+a new plan:
+take input from webservlet then store it in a buffer make a further stack and ques based datat structure that matches the pattern and creates the object value array based on pattern matching
+ok steps to replicate that (rough sketch):
+take input from webservlet from using httpservletrequest requestobject and building it in stringbuiler or stringbuffer then parser will parse the stringbuilder or stringbuffer object and start building with the stack and queue data structure then the inital thoguht to build:
+1st take "":"", this pattern buffer stack and queue buffer to store the chars from the coming string builder object
+2nd building the datastructure required for the datat type here valuedino
+3rd a bit detail "" : , symbols will be stored in stack and its corresponding queues will be made?
+4th in detail after root{ start braces any first "start quote end quote" wil be treated as value then when the last " will be encountered and is popped from the stack a flag will be set some 1 then when : is encountered the previous set value will be set to key and it will expect an array object or value
+5th as currently ongoing with value approach then when the value under "" is parsed and , is encountered it will be made into a value dino object
