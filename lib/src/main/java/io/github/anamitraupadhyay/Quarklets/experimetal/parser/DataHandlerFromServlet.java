@@ -7,7 +7,7 @@ import java.io.IOException;
 
 public class DataHandlerFromServlet {
 
-    public static StringBuilder stringparse(HttpServletRequest httpServletRequestobject){
+    public static StringBuilder stringbuilderparse(HttpServletRequest httpServletRequestobject){
         StringBuilder builderobj = new StringBuilder();
         try (BufferedReader reader = httpServletRequestobject.getReader()) {
             String line;
@@ -19,4 +19,6 @@ public class DataHandlerFromServlet {
         }
         return builderobj;
     }
+    public static StringBuffer stringbufferparse(HttpServletRequest httpServletRequestobject){}
+    public static StringBuffer stringbufferthreadedparse(HttpServletRequest httpServletRequestobject){}
 }
