@@ -7,7 +7,11 @@ public class ObjectDino extends Dino /*implements autoparse likerunnableandproce
 		super(Jsontype.OBJECT, /*childdinoarray,*/ null, key);
 		//TODO Auto-generated constructor stub
 	}
-	// specialized behavior for OBJECT nodes
+
+    public Dino findChildByKey(String key) {//audit changes is needed suppose key is passed here and from the object i need the corresponding value wait its about find child using key so iguess i return the dino that is the required one ok guess the accessing part is gonna be tough
+        return null;
+    }
+    // specialized behavior for OBJECT nodes
 	/*public void parsing() {
 		ObjectDino obj = new ObjectDino();
 	}*/

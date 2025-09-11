@@ -6,5 +6,9 @@ public class ArrayDino extends Dino {
 		super(Jsontype.ARRAY, /*childdinoarray,*/ null, key);
 		//TODO Auto-generated constructor stub
 	}
+
+    public Dino findChildByKey(String key) {
+        return null;
+    }
     // specialized behavior for ARRAY nodes
 }
