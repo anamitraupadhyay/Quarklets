@@ -14,7 +14,7 @@ public abstract class Dino{
      */
 	Dino[] childdinoarray;
 
-	String value;
+	public String value;
 
 	String key;
 
