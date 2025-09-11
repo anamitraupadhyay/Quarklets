@@ -6,5 +6,10 @@ public class ValueDino extends Dino {
 		super(Jsontype.VALUES/*,childdinoarray*/, value, key);
 		//TODO Auto-generated constructor stub
 	}
+
+    @Override
+    public Dino findChildByKey(String key) {
+        return null;
+    }
     // specialized behavior for VALUE nodes
 }
