@@ -14,4 +14,9 @@ public class Token {
     public Token(TokenType type) {
         this(type, null, null);
     }
+    
+    @Override
+    public String toString() {
+        return String.format("Token{type=%s, key='%s', value='%s'}", type, key, value);
+    }
 }

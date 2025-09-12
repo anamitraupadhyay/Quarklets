@@ -31,6 +31,24 @@ public class Tokenizer {
                 case ' ': case '\t': case '\n': case '\r':
                     // Skip whitespace
                     break;
+                default:
+                    // Handle numbers and other values
+                    if (Character.isDigit(c) || c == '-' || c == '.') {
+                        int start = i;
+                        while (i < json.length() && 
+                               (Character.isDigit(json.charAt(i)) || 
+                                json.charAt(i) == '.' || 
+                                json.charAt(i) == '-' ||
+                                json.charAt(i) == 'e' ||
+                                json.charAt(i) == 'E' ||
+                                json.charAt(i) == '+')) {
+                            i++;
+                        }
+                        String number = json.substring(start, i);
+                        tokens.add(new Token(TokenType.STRING, null, number));
+                        i--; // Adjust because the loop will increment
+                    }
+                    break;
             }
             i++;
         }
