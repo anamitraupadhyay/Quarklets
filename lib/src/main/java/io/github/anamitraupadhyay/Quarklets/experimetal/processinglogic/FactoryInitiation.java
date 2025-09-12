@@ -1,20 +1,29 @@
 package io.github.anamitraupadhyay.Quarklets.experimetal.processinglogic;
 
+import io.github.anamitraupadhyay.Quarklets.experimetal.datastructure.Dino;
 import io.github.anamitraupadhyay.Quarklets.experimetal.datastructure.ValueDino;
 import io.github.anamitraupadhyay.Quarklets.experimetal.datastructure.ObjectDino;
 import io.github.anamitraupadhyay.Quarklets.experimetal.datastructure.ArrayDino;
+import io.github.anamitraupadhyay.Quarklets.experimetal.parser.Token;
+
+import static io.github.anamitraupadhyay.Quarklets.experimetal.parser.TokenType.*;
 
 //factory pattern
-public class FactoryInitiation{
-    public static void  toinit(/*here goes some character enums*/){ //later to replaced like runnable interface like thread class api executes any class implementing it
-        if(obj.TokenType is OpenBraces){
-            return new ObjectDino(obj.Key);
-        } else if () {
+public class FactoryInitiation {
 
-        } else if () {
+    // Holds the last-created Dino node
+    public static Dino result;
 
-        } else {
-            throw new IllegalArgumentException(new UnknownCharacterEncountered());
+    public static Dino toinit(Token token) {
+        switch (token.type) {
+            case OPEN_BRACE:
+                return new ObjectDino(token.key);
+            case OPEN_BRACKET:
+                return new ArrayDino(token.key);
+            case STRING:
+                return new ValueDino(token.key, token.value);
+            default:
+                throw new IllegalArgumentException("Cannot create Dino from: " + token.type);
         }
     }
 }

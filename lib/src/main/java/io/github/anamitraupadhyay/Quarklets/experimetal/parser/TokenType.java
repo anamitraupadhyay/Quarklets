@@ -8,5 +8,5 @@ public enum TokenType {
     COLON,          // :
     COMMA,          // ,
     STRING,         // "value"
-    VALUE           // parsed content
+    EOF
 }
