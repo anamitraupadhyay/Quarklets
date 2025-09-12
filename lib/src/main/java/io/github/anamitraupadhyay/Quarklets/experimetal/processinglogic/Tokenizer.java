@@ -23,7 +23,7 @@ public class Tokenizer {
                 case ',': tokens.add(new Token(TokenType.COMMA)); break;
                 case '"':
                     // Simple string parsing
-                    int end = json.indexOf('"', i + 1);
+                    int end = json.toString().indexOf('"', i + 1);
                     String str = json.substring(i + 1, end);
                     tokens.add(new Token(TokenType.STRING, null, str));
                     i = end;
