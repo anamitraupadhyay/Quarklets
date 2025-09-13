@@ -11,6 +11,7 @@ public class SimpleParser {
         Stack<Dino> stack = new Stack<>();
         Dino root = null;
         String pendingKey = null;
+        boolean expectingValue = false;
 
         for (Token token : tokens) {
             switch (token.type) {
@@ -26,23 +27,38 @@ public class SimpleParser {
 
                     stack.push(node);
                     pendingKey = null;
+                    expectingValue = false;
+                    break;
+
+                case COLON:
+                    expectingValue = true;
+                    break;
+
+                case COMMA:
+                    pendingKey = null;
+                    expectingValue = false;
                     break;
 
                 case STRING:
-                    if (pendingKey == null) {
+                    if (!expectingValue && pendingKey == null) {
                         pendingKey = token.value;  // This is a key
                     } else {
                         // This is a value
                         Token valueToken = new Token(TokenType.STRING, pendingKey, token.value);
                         Dino value = FactoryInitiation.toinit(valueToken);
-                        stack.peek().addchild(value);
+                        if (!stack.isEmpty()) {
+                            stack.peek().addchild(value);
+                        }
                         pendingKey = null;
+                        expectingValue = false;
                     }
                     break;
 
                 case CLOSE_BRACE:
                 case CLOSE_BRACKET:
                     stack.pop();
+                    pendingKey = null;
+                    expectingValue = false;
                     break;
             }
         }

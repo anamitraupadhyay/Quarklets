@@ -67,6 +67,11 @@ public abstract class Dino{
     }
 
     public abstract Dino findChildByKey(String key);
+    
+    // Public getter for child count
+    public int getChildCount() {
+        return childcount;
+    }
 }
 
 interface autoparse{

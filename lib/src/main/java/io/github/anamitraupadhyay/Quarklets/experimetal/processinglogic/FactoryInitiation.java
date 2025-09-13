@@ -21,7 +21,7 @@ public class FactoryInitiation {
             case OPEN_BRACKET:
                 return new ArrayDino(token.key);
             case STRING:
-                return new ValueDino(token.key, token.value);
+                return new ValueDino(token.value, token.key);
             default:
                 throw new IllegalArgumentException("Cannot create Dino from: " + token.type);
         }
