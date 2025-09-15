@@ -1,3 +1,6 @@
+![quarkletslogo](https://github.com/user-attachments/assets/a47d767c-b3c8-462d-a7fb-57a5adaa832b)
+
+
 # Thread-Runnable Pattern Implementation for JSON Binding
 
 ## Overview
