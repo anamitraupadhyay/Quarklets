@@ -138,7 +138,7 @@ TransactionData result = processor.process();
 ```bash
 # Compile and run the demonstration
 ./gradlew compileJava
-java -cp lib/build/classes/java/main io.github.anamitraupadhyay.Quarklets.experimetal.servlet.ThreadRunnablePatternDemo
+java -cp lib/build/classes/java/main io.github.anamitraupadhyay.Quarklets.experimetal.exampleofrunnablelikeandsimpleflowlike.ThreadRunnablePatternDemo
 ```
 
 ## Test Coverage

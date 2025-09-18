@@ -1,6 +1,7 @@
-package io.github.anamitraupadhyay.Quarklets.experimetal.processinglogic;
+package io.github.anamitraupadhyay.Quarklets.experimetal.exampleofrunnablelikeandsimpleflowlike;
 
 import io.github.anamitraupadhyay.Quarklets.experimetal.datastructure.Dino;
+import io.github.anamitraupadhyay.Quarklets.experimetal.processinglogic.AutobindInterface;
 
 /**
  * POJO class representing transaction data that implements AutobindInterface.
