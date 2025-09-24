@@ -20,18 +20,18 @@ import io.github.anamitraupadhyay.Quarklets.experimetal.processinglogic.Autobind
 * ok before the object.bind() i can look into the object.start() idea which will contain the execution steps:
 * 1. the requirement of passing the dino tree after parsing built from the tokenization step
 * 2. it will search the tree and bind it automatically though the bind code needs to be done in pojo class-
-* do i need to do some special oop that is identifying the object?
+* do I need to do some special oop that is identifying the object?
 * o ya since it will implement the AutobindInterface so it will run the that object or accept it and do the operations question is how?*/
 
 
 
 public class ServletJsonProcessorReflectionless {
-    AutobindInterface object;
+    AutobindInterface autobindobj;
 
-    public ServletJsonProcessorReflectionless(AutobindInterface object){
-        this.object = object;
+    public ServletJsonProcessorReflectionless(AutobindInterface autobindobj){
+        this.autobindobj = autobindobj;
     }
-    public void method (AutobindInterface object){
+    public void method (AutobindInterface autobindobj){
         //
     }
 }
