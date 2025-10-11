@@ -1,4 +1,5 @@
 import io.github.anamitraupadhyay.Quarklets.essentials.JsonUtils;
+import main.java.InputPOJO;
 
 import jakarta.json.Json;
 import jakarta.json.JsonObject;
@@ -16,12 +17,13 @@ public class UserServlet extends HttpServlet {
         String name = json.getString("Name", "Unknown");
         int age = json.getInt("age", 0);
 
-
-
-        //customjsonparser obj = new customjsonparser(new inputpojo()); or since a class that implements an interface is a interface 
-        //Runnable r = new myclass();
-        //Pojo obj = new Pojo(new inputpojo()); but what happens if i want the binded input pojo object
-
+        // Create InputPOJO instance with parsed values
+        InputPOJO inputPojo = new InputPOJO(name, age);
+        
+        // Print the values
+        System.out.println("Received request with values: " + inputPojo);
+        System.out.println("Name: " + inputPojo.getName());
+        System.out.println("Age: " + inputPojo.getAge());
 
         JsonObject responseJson = Json.createObjectBuilder()
             .add("status", "success")
