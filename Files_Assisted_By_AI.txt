@@ -1,0 +1,12 @@
+Statement on AI Assistance
+The following files were created, edited, or reviewed with the assistance of artificial intelligence tools.
+Human oversight and verification were applied to ensure accuracy, relevance, and quality.
+Last edited: october 11 2025
+
+List of AI-Assisted Files:
+ServletJsonProcessor.java(crucial to core implementation)
+SimpleParser.java and Tokenizer.java(crucial to core implementation but ai usage is absolutely minimum)
+examples/servlet-app(heavy usage)
+exampleofrunnablelikeandsimpleflowlike(all by ai, as this was just for experimienting and testing and is non-necessary)
+
+P.S: ServletJsonProcessor.java is crucial to the implementation which has taken ai help and all other core implemntation as well as designing are done by anamitraupahyay.
