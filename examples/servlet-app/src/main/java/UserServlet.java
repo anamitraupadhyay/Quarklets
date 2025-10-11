@@ -1,4 +1,5 @@
 import io.github.anamitraupadhyay.Quarklets.essentials.JsonUtils;
+import io.github.anamitraupadhyay.Quarklets.experimetal.servlet.ServletJsonProcessor;
 import main.java.InputPOJO;
 
 import jakarta.json.Json;
@@ -13,22 +14,18 @@ import java.io.IOException;
 public class UserServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse res) throws IOException {
-        JsonObject json = JsonUtils.parse(req);
-        String name = json.getString("Name", "Unknown");
-        int age = json.getInt("age", 0);
-
-        // Create InputPOJO instance with parsed values
-        InputPOJO inputPojo = new InputPOJO(name, age);
+        // Single line - HttpServletRequest becomes bound POJO
+        InputPOJO data = ServletJsonProcessor.bind(req, InputPOJO.class);
         
-        // Print the values
-        System.out.println("Received request with values: " + inputPojo);
-        System.out.println("Name: " + inputPojo.getName());
-        System.out.println("Age: " + inputPojo.getAge());
+        // Print out the values proving all are working fine
+        System.out.println("Received request with values: " + data);
+        System.out.println("Name: " + data.getName());
+        System.out.println("Age: " + data.getAge());
 
         JsonObject responseJson = Json.createObjectBuilder()
             .add("status", "success")
-            .add("name", name)
-            .add("age", age)
+            .add("name", data.getName())
+            .add("age", data.getAge())
             .build();
 
         JsonUtils.write(res, responseJson);

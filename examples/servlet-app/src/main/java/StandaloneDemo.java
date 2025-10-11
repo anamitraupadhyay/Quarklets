@@ -1,4 +1,7 @@
 import main.java.InputPOJO;
+import io.github.anamitraupadhyay.Quarklets.experimetal.datastructure.Dino;
+import io.github.anamitraupadhyay.Quarklets.experimetal.datastructure.ObjectDino;
+import io.github.anamitraupadhyay.Quarklets.experimetal.datastructure.ValueDino;
 import java.io.OutputStream;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
@@ -35,17 +38,23 @@ public class StandaloneDemo {
         System.out.println("Simulating JSON request: {\"Name\": \"John\", \"age\": 25}");
         System.out.println();
         
-        // This is what the servlet does internally
-        String name = "John";
-        int age = 25;
+        // Demonstrate the ServletJsonProcessor approach with manual Dino tree
+        System.out.println("Using ServletJsonProcessor approach:");
+        System.out.println("- Creating Dino tree from JSON");
         
-        // Create InputPOJO instance with parsed values
-        InputPOJO inputPojo = new InputPOJO(name, age);
+        // Create a Dino tree manually (simulating what ServletJsonProcessor does)
+        ObjectDino root = new ObjectDino(null);
+        root.addchild(new ValueDino("John", "Name"));
+        root.addchild(new ValueDino("25", "age"));
+        
+        // Create InputPOJO instance and bind
+        InputPOJO data = new InputPOJO();
+        data.bind(root);
         
         // Print the values (same as what UserServlet does)
-        System.out.println("Received request with values: " + inputPojo);
-        System.out.println("Name: " + inputPojo.getName());
-        System.out.println("Age: " + inputPojo.getAge());
+        System.out.println("Received request with values: " + data);
+        System.out.println("Name: " + data.getName());
+        System.out.println("Age: " + data.getAge());
         System.out.println();
         
         // Simulate response
