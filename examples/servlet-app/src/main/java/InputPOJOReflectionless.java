@@ -7,21 +7,19 @@ public class InputPOJOReflectionless extends AutoBinder {
     private String name;
     private int age;
 
-    public InputPOJO() {
+    public InputPOJOReflectionless() {
     }
 
-    public InputPOJO(String name, int age) {
+    public InputPOJOReflectionless(String name, int age) {
         this.name = name;
         this.age = age;
     }
 
     @Override
     public void bind() {
-        if (jsonTree == null) return;
-        
         // Use the helper methods from AutobindInterface to extract values
-        this.name = getString("Name", jsonTree);
-        this.age = getInt("age", jsonTree);
+        this.name = getString("Name");
+        this.age = getInt("age");
     }
 
     public String getName() {

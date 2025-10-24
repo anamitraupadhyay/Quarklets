@@ -1,7 +1,9 @@
 import io.github.anamitraupadhyay.Quarklets.essentials.JsonUtils;
 import io.github.anamitraupadhyay.Quarklets.experimetal.servlet.ServletJsonProcessor;
 import io.github.anamitraupadhyay.Quarklets.experimetal.servlet.ServletJsonProcessorReflectionless;
+
 import main.java.InputPOJO;
+import main.java.InputPOJOReflectionless;
 
 import jakarta.json.Json;
 import jakarta.json.JsonObject;
@@ -31,7 +33,7 @@ public class UserServlet extends HttpServlet {
 
         // Single line reflectionless JsonBinder
         ServletJsonProcessorReflectionless processor = new ServletJsonProcessorReflectionless(req);
-        InputPOJOReflectionless user = processor.bind(new InputPOJOReflectionless());
+        InputPOJOReflectionless user = processor.binder(new InputPOJOReflectionless());
 
         // Print out the values proving all are working fine
         System.out.println("Received request with values using reflectionless binding: " + user);

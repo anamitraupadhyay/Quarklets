@@ -1,11 +1,12 @@
 package io.github.anamitraupadhyay.Quarklets.experimetal.parser;
 
 import io.github.anamitraupadhyay.Quarklets.experimetal.datastructure.Dino;
+import io.github.anamitraupadhyay.Quarklets.experimetal.datastructure.ObjectDino;
 
 public abstract class AutoBinder {
     public Dino tree;
 
-    public setroot(Dino root){ this.tree = root; bind();}
+    public void setroot(Dino root){ this.tree = root; bind();}
     public abstract void bind();
 
     public int getInt(String key /*, Dino tree*/) {
