@@ -1,6 +1,9 @@
 package io.github.anamitraupadhyay.Quarklets.experimetal.servlet;
 
-import io.github.anamitraupadhyay.Quarklets.experimetal.processinglogic.AutobindInterface;
+import jakarta.servlet.http.HttpServletRequest;
+
+import io.github.anamitraupadhyay.Quarklets.experimetal.parser.AutoBinder;
+//import io.github.anamitraupadhyay.Quarklets.experimetal.processinglogic.AutobindInterface;
 
 /*
 * going to be exactly similar to the implementation of the runnable interface implementation
@@ -26,12 +29,32 @@ import io.github.anamitraupadhyay.Quarklets.experimetal.processinglogic.Autobind
 
 
 public class ServletJsonProcessorReflectionless {
-    AutobindInterface autobindobj;
+    //AutoBinder autobindobj;
+    HttpServletRequest request;
 
-    public ServletJsonProcessorReflectionless(AutobindInterface autobindobj){
-        this.autobindobj = autobindobj;
+    public ServletJsonProcessorReflectionless(HttpServletRequest request){
+        this.request = request;
     }
-    public void method (AutobindInterface autobindobj){
-        //
+
+    public <T extends AutoBinder> T binder(T pojo){
+            // Step 1: HttpServletRequest → StringBuilder
+            StringBuilder jsonData = DataHandlerFromServlet.stringbuilderparse(request);
+            
+            // Step 2: Find JSON start position (handle BOM/cleanup)
+            int jsonStart = DataHandlerFromServlet.findJsonStart(jsonData);
+            
+            // Step 3: StringBuilder → Tokens
+            Tokenizer tokenizer = new Tokenizer();
+            List<Token> tokens = tokenizer.JsonParse(jsonData, jsonStart);
+            
+            // Step 4: Tokens → Dino object tree
+            SimpleParser parser = new SimpleParser();
+            Dino jsonTree = parser.parse(tokens);
+            
+            pojo.setroot(jsonTree);
+            
+            // Step 6: Bind data (like Thread.run() calling Runnable.run())
+            
+            return pojo;
     }
 }
