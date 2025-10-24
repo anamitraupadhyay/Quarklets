@@ -58,9 +58,7 @@ public class ServletJsonProcessorReflectionless {
             SimpleParser parser = new SimpleParser();
             Dino jsonTree = parser.parse(tokens);
             
-            pojo.setroot(jsonTree);
-            
-            // Step 6: Bind data (like Thread.run() calling Runnable.run())
+            pojo.setroot(jsonTree);//setroot as the bind() stays clean in actual usage
             
             return pojo;
     }
