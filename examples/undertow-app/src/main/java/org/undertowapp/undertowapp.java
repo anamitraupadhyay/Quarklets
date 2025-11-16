@@ -52,6 +52,10 @@ public class UndertowQuarkletsServer {
                 ServletJsonProcessorReflectionless processor = new ServletJsonProcessorReflectionless(mockRequest);
                 InputPOJOReflectionless user = processor.binder(new InputPOJOReflectionless());
 
+                //
+                //ServletJsonProcessor processor1 = new ServletJsonProcessor(mockRequest);
+                //InputPOJO user1 = processor.binder(exchange, User.class)
+
                 // Log the results (for demonstration)
                 System.out.println("Received request with values using reflectionless binding:");
                 System.out.println("Name: " + user.getName());
