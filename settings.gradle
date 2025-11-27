@@ -15,6 +15,5 @@ rootProject.name = "Quarklets"
 include("lib")
 // include("examples:servlet-app") // comment this out temporarily
 
-include 'guiceimpl'
 include 'Webserver'
 include 'Threadimpl'

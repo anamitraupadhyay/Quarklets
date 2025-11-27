@@ -5,6 +5,12 @@ plugins {
 group = 'org.javaweb'
 version = 'unspecified'
 
+java {
+    toolchain {
+        languageVersion = JavaLanguageVersion.of(25)
+    }
+}
+
 repositories {
     mavenCentral()
 }
