@@ -133,6 +133,106 @@ TransactionData result = processor.process();
 - ✅ **Compile-time**: Type checking for target classes
 - ✅ **Runtime**: Automatic instantiation and binding
 
+## Build & Development
+
+### Prerequisites
+
+- **JDK 25** (required)
+- **Gradle 9.0.0** (included via Gradle Wrapper)
+
+### Build Commands (Run Serially)
+
+```bash
+# 1. Clean previous build artifacts
+./gradlew clean
+
+# 2. Compile all modules
+./gradlew compileJava
+
+# 3. Run all tests
+./gradlew test
+
+# 4. Build all modules (compile + test + jar)
+./gradlew build
+
+# 5. Publish to Maven Local Repository
+./gradlew :lib:publishToMavenLocal
+```
+
+### Single Command (Clean Build + Maven Local Publish)
+
+```bash
+# All-in-one: clean, build, test, and publish to Maven Local
+./gradlew clean build :lib:publishToMavenLocal
+```
+
+### Maven Local Artifact Location
+
+After publishing, artifacts are available at:
+```
+~/.m2/repository/io/github/anamitraupadhyay/lib/1.0.0-SNAPSHOT/
+├── lib-1.0.0-SNAPSHOT.jar
+├── lib-1.0.0-SNAPSHOT-sources.jar
+├── lib-1.0.0-SNAPSHOT-javadoc.jar
+├── lib-1.0.0-SNAPSHOT.pom
+└── lib-1.0.0-SNAPSHOT.module
+```
+
+### Use as Dependency
+
+After publishing to Maven Local, add to your project:
+
+**Gradle:**
+```groovy
+repositories {
+    mavenLocal()
+}
+
+dependencies {
+    implementation 'io.github.anamitraupadhyay:lib:1.0.0-SNAPSHOT'
+}
+```
+
+**Maven:**
+```xml
+<dependency>
+    <groupId>io.github.anamitraupadhyay</groupId>
+    <artifactId>lib</artifactId>
+    <version>1.0.0-SNAPSHOT</version>
+</dependency>
+```
+
+### Additional Gradle Tasks
+
+```bash
+# View all available publishing tasks
+./gradlew tasks --group=publishing
+
+# Verify publication configuration
+./gradlew :lib:verifyPublication
+
+# Generate Javadoc
+./gradlew :lib:javadoc
+
+# Create source JAR
+./gradlew :lib:sourcesJar
+
+# Create Javadoc JAR
+./gradlew :lib:javadocJar
+```
+
+### Gradle Wrapper
+
+The project uses Gradle Wrapper (gradlew) version 9.0.0. No manual Gradle installation required.
+
+```bash
+# Check Gradle version
+./gradlew --version
+
+# Update Gradle Wrapper (if needed)
+./gradlew wrapper --gradle-version=9.0.0
+```
+
 ## Running the Demo
 
 ```bash
