@@ -15,6 +15,6 @@ rootProject.name = "Quarklets"
 include("lib")
 // include("examples:servlet-app") // comment this out temporarily
 
-include 'guiceimpl'
+//include 'guiceimpl' deprecated as guice works on different DI and conflicts with quarkus DI
 include 'Webserver'
 include 'Threadimpl'
